@@ -1,10 +1,13 @@
 import pyautogui
 import time
 import datetime
+import random
 
 message_interval = int(input("message interval: "))
-test_set = int(input("test set: "))
-use_image = str(input('use image(y/n):'))
+test_set = 999999
+# test_set = int(input("test set: "))
+# use_image = str(input('use image(y/n):'))
+use_image = 'n'
 
 text_image = [
     '0______________==______________0',
@@ -28,23 +31,36 @@ for i in range(countdown, 0, -1):
 
 print("SPAM IT!!!")
 
+duration = random.randint(3600, 5*3600)
+
+start_time = time.time()
+
+
 for i in range(test_set):
-    if(use_image == 'y'):
+
+    print(time.time())
+    print(start_time)
+    print(duration)
+    
+    if (time.time() > start_time + duration):
+        break
+
+    if (use_image == 'y'):
         for img in text_image:
-            print(f'{img}') 
-            pyautogui.typewrite(f'{img}\r\n')
-            
+            print(img)
+            pyautogui.typewrite(img)
+            pyautogui.typewrite('\r\n')
+
             time.sleep(message_interval)
     else:
-        for j in range(0,11):
-            print(f'{i:2} {j:2} | {datetime.datetime.now().strftime("%c")}') 
-            pyautogui.typewrite(
-                f'{i:2} {j:2}  | {datetime.datetime.now().strftime("%c")}\r\n')
-            
+        for j in range(0, 11):
+            print(str(i) + ' : ' + str(j) + ' | ' +
+                  datetime.datetime.now().strftime("%c"))
+            pyautogui.typewrite(str(i) + ' : ' + str(j) + ' | ' +
+                                datetime.datetime.now().strftime("%c")+'\r\n')
+
             time.sleep(message_interval)
 
     time.sleep(message_interval)
-    print(f'==================================')
-    pyautogui.typewrite(f'==================================\r\n')
-
-    
+    print('==================================')
+    pyautogui.typewrite('==================================\r\n')
