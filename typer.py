@@ -4,6 +4,7 @@ import pyautogui
 import time
 import datetime
 import random
+import subprocess
 
 message_interval = int(input("message interval: "))
 test_set = 999999
@@ -29,12 +30,11 @@ print("Time to start, please place / focus on the input box")
 res = quote('family', limit=1)
 print(res[0]['quote'])
 
-repo = Repo('.')
-repo.index.add(['spam.py'])
-repo.index.commit(res[0]['quote'])
-origin = repo.remotes[0]
-origin.push()
+subprocess.call(
+    'powershell.exe git commit -a -m "lalalla"', shell=True)
 
+subprocess.call(
+    'powershell.exe git push', shell=True)
 countdown = 10
 for i in range(countdown, 0, -1):
     print(i)
@@ -52,7 +52,7 @@ start_time = time.time()
 #     print(time.time())
 #     print(start_time)
 #     print(duration)
-    
+
 #     if (time.time() > start_time + duration):
 #         break
 
@@ -75,5 +75,3 @@ start_time = time.time()
 #     time.sleep(message_interval)
 #     print('==================================')
 #     pyautogui.typewrite('==================================\r\n')
-
-
