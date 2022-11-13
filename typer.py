@@ -4,7 +4,7 @@ import pyautogui
 import time
 import datetime
 import random
-import subprocess
+
 
 message_interval = int(input("message interval: "))
 test_set = 999999
@@ -27,14 +27,6 @@ text_image = [
 
 print("Time to start, please place / focus on the input box")
 
-res = quote('family', limit=1)
-print(res[0]['quote'])
-
-subprocess.call(
-    'powershell.exe git commit -a -m "lalalla"', shell=True)
-
-subprocess.call(
-    'powershell.exe git push', shell=True)
 countdown = 10
 for i in range(countdown, 0, -1):
     print(i)
@@ -47,31 +39,42 @@ duration = random.randint(3600, 5*3600)
 start_time = time.time()
 
 
-# for i in range(test_set):
+for i in range(test_set):
 
-#     print(time.time())
-#     print(start_time)
-#     print(duration)
+    print(time.time())
+    print(start_time)
+    print(duration)
+    
+    if (time.time() > start_time + duration):
+        break
 
-#     if (time.time() > start_time + duration):
-#         break
+    if (use_image == 'y'):
+        for img in text_image:
+            print(img)
+            pyautogui.typewrite(img)
+            pyautogui.typewrite('\r\n')
 
-#     if (use_image == 'y'):
-#         for img in text_image:
-#             print(img)
-#             pyautogui.typewrite(img)
-#             pyautogui.typewrite('\r\n')
+            time.sleep(message_interval)
+    else:
+        for j in range(0, 11):
+            print(str(i) + ' : ' + str(j) + ' | ' +
+                  datetime.datetime.now().strftime("%c"))
+            pyautogui.typewrite(str(i) + ' : ' + str(j) + ' | ' +
+                                datetime.datetime.now().strftime("%c")+'\r\n')
 
-#             time.sleep(message_interval)
-#     else:
-#         for j in range(0, 11):
-#             print(str(i) + ' : ' + str(j) + ' | ' +
-#                   datetime.datetime.now().strftime("%c"))
-#             pyautogui.typewrite(str(i) + ' : ' + str(j) + ' | ' +
-#                                 datetime.datetime.now().strftime("%c")+'\r\n')
+            time.sleep(message_interval)
 
-#             time.sleep(message_interval)
+    time.sleep(message_interval)
+    print('==================================')
+    pyautogui.typewrite('==================================\r\n')
 
-#     time.sleep(message_interval)
-#     print('==================================')
-#     pyautogui.typewrite('==================================\r\n')
+
+res = quote('family', limit=1)
+print(res[0]['quote'])
+
+
+repo = Repo('.')
+repo.index.add(['spam.py'])
+repo.index.commit(str(time.time()))
+origin = repo.remotes[0]
+origin.push()
